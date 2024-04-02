@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportFileDialogComponent } from './import-file-dialog/import-file-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AppComponent {
   
 
-  constructor(public dialog: MatDialog,private _snackBar: MatSnackBar) {}
+  constructor(public dialog: MatDialog,private apiService:ApiService) {}
 
   ngOnInit() {
     
@@ -23,14 +24,17 @@ export class AppComponent {
         });
         dialogRef.afterClosed().subscribe(async file => {
             if (file) {
+              this.apiService.uploadCSV(file).subscribe(res=>{
+                console.log(res);
+                this.apiService.openSnackBar('Upload successful', 'Success');
+              })
                 const reader = new FileReader();
                 reader.addEventListener('load', (event: any) => {
                     try {
                       console.log(reader);
 
                     } catch (e) {
-                      this._snackBar.open('Please upload a valid file.', 'Error');
-                        
+                      this.apiService.openSnackBar('Please upload a valid file.', 'Error');
                     }
                 });
                 reader.readAsText(file);
