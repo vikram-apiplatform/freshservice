@@ -3,17 +3,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImportFileDialogComponent } from './import-file-dialog/import-file-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from './api.service';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {displayDefaultIndicatorType: false},
+    },
+  ],
 })
 export class AppComponent {
   
 
   constructor(public dialog: MatDialog,private apiService:ApiService) {}
-
+  
   ngOnInit() {
     
   }

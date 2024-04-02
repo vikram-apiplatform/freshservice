@@ -1,21 +1,32 @@
 <div class="container" style="background-color: #f8f9fa; margin: 1rem;">
   <mat-stepper #stepper>
-    <mat-step>
-      <ng-template matStepLabel>Import CSV</ng-template>
+    <mat-step label="Upload CSV" state="upload">
       <div class="col-12" style="text-align: center;margin-top: 2rem;">
         <button mat-raised-button (click)="uploadFile()">
           Import file
       </button>
       </div>
     </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Connect Fresh Service</ng-template>
+    <mat-step label="Connect Fresh Service" state="connect">
+      
     </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>JSON Mapping</ng-template>
+    <mat-step label="JSON Mapping" state="mapping">
+
     </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Migrate Data</ng-template>
+    <mat-step label="Migrate Data" state="data">
     </mat-step>
+
+    <ng-template matStepperIcon="upload">
+      <mat-icon>publish</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="connect">
+      <mat-icon>usb</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="mapping">
+      <mat-icon>device_hub</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="data">
+      <mat-icon>send</mat-icon>
+    </ng-template>
   </mat-stepper>
 </div>
