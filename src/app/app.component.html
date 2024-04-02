@@ -1,14 +1,48 @@
+<app-header></app-header>
 <div class="container" style="background-color: #f8f9fa; margin: 1rem;">
   <mat-stepper #stepper>
-    <mat-step label="Upload CSV" state="upload">
-      <div class="col-12" style="text-align: center;margin-top: 2rem;">
-        <button mat-raised-button (click)="uploadFile()">
-          Import file
-      </button>
-      </div>
+    <mat-step label="Upload CSV" state="scan">
+      <mat-card>
+        <p class="source-txt">Kindly select the source CSV file</p>
+        <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
+          <button mat-raised-button (click)="uploadFile()">
+            Select File
+          </button>
+        </div>
+      </mat-card>
+    </mat-step>
+    <mat-step label="Ready to Import" state="upload">
+      <mat-card>
+        <p class="source-txt">CSV file has been scanned successfully.</p>
+        <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
+          <button mat-raised-button matStepperNext>
+            Proceed to Next 
+          </button>
+        </div>
+      </mat-card>
     </mat-step>
     <mat-step label="Connect Fresh Service" state="connect">
-      
+      <mat-card style="width: 400px;margin: auto;">
+        <p class="source-txt">Configure API Key</p>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>API Key</mat-label>
+            <input matInput [(ngModel)]="apikey">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput  [(ngModel)]="password">
+          </mat-form-field>
+        </div>
+        <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
+          <button mat-raised-button style="margin-right: 10px;">
+            Connect
+          </button>
+          <button mat-raised-button matStepperNext>
+            Proceed to Next 
+          </button>
+        </div>
+      </mat-card>
     </mat-step>
     <mat-step label="JSON Mapping" state="mapping">
 
@@ -22,8 +56,11 @@
     <ng-template matStepperIcon="connect">
       <mat-icon>usb</mat-icon>
     </ng-template>
-    <ng-template matStepperIcon="mapping">
+    <ng-template matStepperIcon="scan">
       <mat-icon>device_hub</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="mapping">
+      <mat-icon>list_alt</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="data">
       <mat-icon>send</mat-icon>

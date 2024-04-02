@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpEvent, HttpResponse, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../environments/environment';
-import {map} from 'rxjs/operators';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpEvent, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+import { map } from 'rxjs/operators';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  
+
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar) {
 
@@ -24,10 +24,11 @@ export class ApiService {
     });
   }
 
-  uploadCSV(file: File): Observable<any> {
+  uploadCSV(file: File, columns: any): Observable<any> {
 
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('columns', columns);
 
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'multipart/form-data');
@@ -37,6 +38,6 @@ export class ApiService {
       .pipe(map(res => res));
   }
 
-  
+
 
 }

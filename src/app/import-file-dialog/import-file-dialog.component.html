@@ -1,7 +1,8 @@
 <div mat-dialog-title style="text-align: center">
     <div>
-        <i class="fa fa-close close-icon" (click)="closeDialog()"></i>
-        Import File
+        <!-- <i class="fa fa-close close-icon" (click)="closeDialog()"></i> -->
+        <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+        Upload CSV
     </div>
 </div>
 
@@ -25,7 +26,7 @@
 
             <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 file-action-container" style="display: flex; justify-content: flex-end">
                 <button mat-raised-button *ngIf="file && file['item']" class="apiplatform-btn-2" [mat-dialog-close]="file['item']">
-                    Import file
+                    Scan
                 </button>
                 <span class="material-icons" (click)="deleteFile()" style="margin: 0 5px ">
                                     delete

@@ -15,11 +15,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImportFileDialogComponent
+    ImportFileDialogComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
