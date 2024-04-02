@@ -1,0 +1,42 @@
+.close-icon {
+    color: red;
+    float: right;
+    font-size: 1rem
+  }
+  
+  .drag-drop-container {
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .drag-drop-inner-container {
+    padding: 10px;
+    height: 40%
+  }
+  
+  .fileName {
+    display: inline-block;
+    width: 300px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .file-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .file-action-container {
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .material-icons {
+    cursor: pointer;
+  }
+  
