@@ -24,10 +24,6 @@ export class ApiService {
     });
   }
 
-  
-
-  
-
   uploadCSV(file: File): Observable<any> {
 
     const formData = new FormData();
