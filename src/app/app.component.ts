@@ -215,6 +215,7 @@ export class AppComponent {
   ];
   apikey:any;
   password:any;
+  file:any;
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
@@ -228,6 +229,7 @@ export class AppComponent {
     });
     dialogRef.afterClosed().subscribe(async file => {
       if (file) {
+        this.file = file;
         this.apiService.uploadCSV(file, this.columns).subscribe(res => {
           console.log(res);
           this.apiService.openSnackBar('Upload successful', 'Success');
