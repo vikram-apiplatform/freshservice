@@ -283,104 +283,104 @@
     </mat-step> -->
 
     <mat-step label="Field Mapping" state="mapping">
-        <div style="text-align: right;margin-bottom: 1rem;">
-          <button mat-raised-button matStepperNext color="primary"
-            style="margin-left: 10px;">
-            Proceed to Transformation
-          </button>
-        </div>
+      <div style="text-align: right;margin-bottom: 1rem;">
+        <button mat-raised-button matStepperNext color="primary" style="margin-left: 10px;">
+          Proceed to Transformation
+        </button>
+      </div>
       <mat-tab-group mat-align-tabs="start">
         <mat-tab *ngFor="let target of payload.target; let i = index">
           <ng-template mat-tab-label>
             <span>{{target.name}}</span>
-        </ng-template>
-        <div class="table-responsive" style="height: 80vh;overflow-y: auto;margin-top: 10px;">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Target Field</th>
-                <th scope="col">Source Field</th>
-                <th scope="col">Override</th>
-                <th scope="col"> <mat-icon matTooltip="Add Attribute" (click)="addTargetAttributeField(i)">add_box</mat-icon>
-                </th>
-              </tr>
-            </thead>
-  
-            <tbody>
-              <ng-container *ngFor="let attribute of target.fieldMappings; let j = index">
-                <tr class="root">
-                  <td class="tour-schema-def-data-type">
-                    <input class="form-control attribute" [value]="attribute.targetfield"
-                      [(ngModel)]="attribute.targetfield">
-  
-                  </td>
-  
-  
-                  <td class="tour-schema-def-data-type">
-  
-                    <input class="form-control" [(ngModel)]="attribute.sourcefield" type="text">
-                  </td>
-                  <td>
-                    <!-- <mat-checkbox
+          </ng-template>
+          <div class="table-responsive" style="height: 80vh;overflow-y: auto;margin-top: 10px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Target Field</th>
+                  <th scope="col">Source Field</th>
+                  <th scope="col">Override</th>
+                  <th scope="col"> <mat-icon matTooltip="Add Attribute"
+                      (click)="addTargetAttributeField(i)">add_box</mat-icon>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <ng-container *ngFor="let attribute of target.fieldMappings; let j = index">
+                  <tr class="root">
+                    <td class="tour-schema-def-data-type">
+                      <input class="form-control attribute" [value]="attribute.targetfield"
+                        [(ngModel)]="attribute.targetfield">
+
+                    </td>
+
+
+                    <td class="tour-schema-def-data-type">
+
+                      <input class="form-control" [(ngModel)]="attribute.sourcefield" type="text">
+                    </td>
+                    <td>
+                      <!-- <mat-checkbox
                                   [checked]="attribute.isOverride"
                                   (change)="attribute.isOverride = !attribute.isOverride;">
                               </mat-checkbox> -->
-                    <mat-icon (click)="toggleCollapse(attribute.sourcefield);" matTooltip="Add"><span
-                        *ngIf="expandedRows.includes(attribute.sourcefield)">keyboard_arrow_down</span>
-                      <span *ngIf="!expandedRows.includes(attribute.sourcefield)">keyboard_arrow_up</span></mat-icon>
-  
-                  </td>
-  
-                  <td>
-                    <mat-icon (click)="removeAttribute(target.fieldMappings, j)">remove_circle</mat-icon>
-  
-                  </td>
-  
-                </tr>
-                <tr *ngIf="(attribute && expandedRows.includes(attribute.sourcefield))">
-                  <td colspan="3">
-                    <div class="table-responsive">
-                      <table class="col-lg-12 col-md-12 col-sm-12">
-                        <thead>
-                          <tr>
-                            <th>Source Value</th>
-                            <th>Target Value</th>
-                            <th>
-                              <mat-icon matTooltip="Add Attribute" (click)="addOverride(attribute)">add_box</mat-icon>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let override of attribute.override;let k = index">
-                            <td>
-                              <input class=" form-control" [(ngModel)]="override.sourcevalue" type="text">
-                            </td>
-                            <td>
-                              <input class="form-control" [(ngModel)]="override.targetvalue" type="text">
-                            </td>
-                            <td class="text-center">
-                              <mat-icon (click)="removeOverride(attribute, k)">remove_circle</mat-icon>
-  
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </ng-container>
-  
-            </tbody>
-          </table>
-        </div>
+                      <mat-icon (click)="toggleCollapse(attribute.sourcefield);" matTooltip="Add"><span
+                          *ngIf="expandedRows.includes(attribute.sourcefield)">keyboard_arrow_down</span>
+                        <span *ngIf="!expandedRows.includes(attribute.sourcefield)">keyboard_arrow_up</span></mat-icon>
+
+                    </td>
+
+                    <td>
+                      <mat-icon (click)="removeAttribute(target.fieldMappings, j)">remove_circle</mat-icon>
+
+                    </td>
+
+                  </tr>
+                  <tr *ngIf="(attribute && expandedRows.includes(attribute.sourcefield))">
+                    <td colspan="3">
+                      <div class="table-responsive">
+                        <table class="col-lg-12 col-md-12 col-sm-12">
+                          <thead>
+                            <tr>
+                              <th>Source Value</th>
+                              <th>Target Value</th>
+                              <th>
+                                <mat-icon matTooltip="Add Attribute" (click)="addOverride(attribute)">add_box</mat-icon>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let override of attribute.override;let k = index">
+                              <td>
+                                <input class=" form-control" [(ngModel)]="override.sourcevalue" type="text">
+                              </td>
+                              <td>
+                                <input class="form-control" [(ngModel)]="override.targetvalue" type="text">
+                              </td>
+                              <td class="text-center">
+                                <mat-icon (click)="removeOverride(attribute, k)">remove_circle</mat-icon>
+
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+          </div>
         </mat-tab>
       </mat-tab-group>
-      
+
 
     </mat-step>
 
     <mat-step label="Transformation" state="data">
-      <mat-card>
+      <mat-card style="width: 450px;margin: auto;">
         <p class="source-txt">Everything is setup to transform data</p>
         <div style="text-align: center;margin: 2rem;">
           <img class="sty" src="../assets/transform.jpg" width="150" height="150">
@@ -400,33 +400,74 @@
     </mat-step>
 
     <mat-step label="Result" state="result">
-      <mat-card>
+      <mat-card style="width: 90%;margin: auto;">
         <p class="source-txt">Data Transformation Results</p>
-        <div class="row col-12">
+        <div class="d-flex">
           <div class="col-4">
             <div *ngIf="workflowRunData">
-              <div class="d-flex justify-content-between">
-                <div>Run Id :</div>
-                <div>{{workflowRunData['workflowRunId']}}</div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div>Start Time :</div>
-                <div>{{getFormattedTime(workflowRunData['startTime'])}}</div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div>Total Records :</div>
-                <div>{{workflowRunData['totalRecords']}}</div>
-              </div>
+              <p><span class="source-txt">Run Id :</span> {{workflowRunData['workflowRunId']}}</p>
+              <p><span class="source-txt">Start Time :</span> {{getFormattedTime(workflowRunData['startTime'])}}</p>
+              <p><span class="source-txt">Total Records :</span> {{workflowRunData['totalRecords']}}</p>
             </div>
           </div>
-          <div>
-            <!-- <canvas baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType" [colors]="colors"
-            [options]="options" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas> -->
+          <div class="col-2"></div>
+          <div class="col-6">
+            <canvas baseChart [labels]="chartLabels" [datasets]="doughnutChartDatasets" [options]="doughnutChartOptions"
+              [legend]="true" [type]="'doughnut'">
+            </canvas>
           </div>
         </div>
-        
+
+        <div class="table-responsive" style="margin-top:2rem;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Step Id</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <ng-container *ngFor="let item of workflowRunData.steps; let j = index">
+                <tr class="root">
+                  <td>{{item.stepId}}</td>
+                  <td>{{getFormattedTime(item.startTime)}}</td>
+                  <td>{{getFormattedTime(item.endTime)}}</td>
+                  <td>{{item.status}}</td>
+                </tr>
+                <tr *ngIf="item.subSteps">
+                  <td colspan="3">
+                    <div class="table-responsive">
+                      <table class="col-lg-12 col-md-12 col-sm-12">
+                        <thead>
+                          <tr>
+                            <th scope="col">Step Id</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">End Time</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item1 of item.subSteps;let k = index">
+                            <td>{{item1.stepId}}</td>
+                            <td>{{getFormattedTime(item1.startTime)}}</td>
+                            <td>{{getFormattedTime(item1.endTime)}}</td>
+                            <td>{{item1.status}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+
+            </tbody>
+          </table>
+        </div>
       </mat-card>
+
     </mat-step>
 
     <ng-template matStepperIcon="upload">

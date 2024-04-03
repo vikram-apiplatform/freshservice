@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from './api.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
+import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-root',
@@ -224,7 +225,7 @@ export class AppComponent {
   jsonfile: any = {};
   importJson = false;
   isLinear = true;
-  selectedIndex = 0;
+  selectedIndex = 4;
   isconnected = false;
   connectionResult = '';
   isLoading1 = false;
@@ -234,7 +235,450 @@ export class AppComponent {
   expandedRows: string[] = [];
   scanResult: any = {};
   workflowRunId: any = 'd1c1959e-1a62-44d9-b75e-dd6a6fb74dd3';
-  workflowRunData: any;
+  // workflowRunData: any;
+  workflowRunData: any ={
+    "workflowRunId": "cd093a56-dd0b-4f11-abe6-b0b54801072a",
+    "workflowName": "ZendeskToFreshService",
+    "startTime": "2024-04-03T08:37:00.504+0000",
+    "endTime": "2024-04-03T08:37:00.504+0000",
+    "status": "started",
+    "totalRecords": 100,
+    "_class": "com.apiplatform.datatransformation.model.WorkflowRun",
+    "steps": [
+        {
+            "isSubStep": false,
+            "logMessage": "Source data extraction completed",
+            "stepId": "5bb58321-40de-46ab-81d0-7e490cde15c9",
+            "startTime": 1712133422377,
+            "endTime": 1712133422377,
+            "_class": "com.apiplatform.datatransformation.model.StepRun",
+            "workflowRunId": "cd093a56-dd0b-4f11-abe6-b0b54801072a",
+            "isStepDone": false,
+            "status": "success"
+        },
+        {
+            "isSubStep": false,
+            "subSteps": [
+                {
+                    "isSubStep": true,
+                    "logMessage": "Data transfer - failed",
+                    "stepId": "6340be69-917b-47dc-ad52-d73a23661cea",
+                    "subStepId": "71ee3387-9d9c-4d76-9849-1daab7814702",
+                    "startTime": 1712133426936,
+                    "endTime": 1712133430731,
+                    "_class": "com.apiplatform.datatransformation.model.StepRun",
+                    "additionalDetails": {
+                        "response": {
+                            "headers": [
+                                {
+                                    "name": "Date",
+                                    "value": "Wed, 03 Apr 2024 08:37:10 GMT"
+                                },
+                                {
+                                    "name": "Content-Type",
+                                    "value": "application/json; charset=utf-8"
+                                },
+                                {
+                                    "name": "Transfer-Encoding",
+                                    "value": "chunked"
+                                },
+                                {
+                                    "name": "Connection",
+                                    "value": "keep-alive"
+                                },
+                                {
+                                    "name": "Status",
+                                    "value": "400 Bad Request"
+                                },
+                                {
+                                    "name": "Cache-Control",
+                                    "value": "no-cache, no-store"
+                                },
+                                {
+                                    "name": "X-Freshservice-Api-Version",
+                                    "value": "latest=v2; requested=v2"
+                                },
+                                {
+                                    "name": "Pragma",
+                                    "value": "no-cache"
+                                },
+                                {
+                                    "name": "X-Request-Id",
+                                    "value": "95095ef5-3b46-443d-9032-84e71fea09af"
+                                },
+                                {
+                                    "name": "Expires",
+                                    "value": "Wed, 13 Oct 2010 00:00:00 UTC"
+                                },
+                                {
+                                    "name": "X-Envoy-Upstream-Service-Time",
+                                    "value": "66"
+                                },
+                                {
+                                    "name": "X-Fw-Ratelimiting-Managed",
+                                    "value": "true"
+                                },
+                                {
+                                    "name": "X-Ratelimit-Total",
+                                    "value": "160"
+                                },
+                                {
+                                    "name": "X-Ratelimit-Remaining",
+                                    "value": "159"
+                                },
+                                {
+                                    "name": "X-Ratelimit-Used-Currentrequest",
+                                    "value": "1"
+                                },
+                                {
+                                    "name": "X-Trace-Id",
+                                    "value": "00-0427441c9639cc3d2b7e1360d906ee2e-c689ce87329d880d-00"
+                                },
+                                {
+                                    "name": "Nel",
+                                    "value": "{ \"report_to\": \"nel-endpoint-freshservice\", \"max_age\": 2592000, \"include_subdomains\": true}"
+                                },
+                                {
+                                    "name": "Report-To",
+                                    "value": "{ \"group\": \"nel-endpoint-freshservice\", \"max_age\": 2592000, \"include_subdomains\": true, \"endpoints\": [{\"url\": \"https://edge-admin.ap-south-1.freshedge.net/nelreports/freshservice\"}]}"
+                                },
+                                {
+                                    "name": "Server",
+                                    "value": "fwe"
+                                }
+                            ],
+                            "statusLine": "HTTP/1.1 400 Bad Request",
+                            "contentLength": 266,
+                            "attributes": [
+                                {
+                                    "displayName": null,
+                                    "defaultValue": null,
+                                    "precision": 0,
+                                    "autoIncrement": false,
+                                    "description": null,
+                                    "displayPolicy": null,
+                                    "type": "String",
+                                    "required": false,
+                                    "compliances": null,
+                                    "apiAccessPolicy": null,
+                                    "customType": false,
+                                    "size": 0,
+                                    "updateOption": null,
+                                    "array": false,
+                                    "previousAttributeName": null,
+                                    "attributeType": null,
+                                    "attributeName": "description",
+                                    "subType": [],
+                                    "dataStoragePolicy": null
+                                },
+                                {
+                                    "displayName": null,
+                                    "defaultValue": null,
+                                    "precision": 0,
+                                    "autoIncrement": false,
+                                    "description": null,
+                                    "displayPolicy": null,
+                                    "type": "Object",
+                                    "required": false,
+                                    "compliances": null,
+                                    "apiAccessPolicy": null,
+                                    "customType": false,
+                                    "size": 0,
+                                    "updateOption": null,
+                                    "array": true,
+                                    "previousAttributeName": null,
+                                    "attributeType": null,
+                                    "attributeName": "errors",
+                                    "subType": [
+                                        {
+                                            "displayName": null,
+                                            "defaultValue": null,
+                                            "precision": 0,
+                                            "autoIncrement": false,
+                                            "description": null,
+                                            "displayPolicy": null,
+                                            "type": "String",
+                                            "required": false,
+                                            "compliances": null,
+                                            "apiAccessPolicy": null,
+                                            "customType": false,
+                                            "size": 0,
+                                            "updateOption": null,
+                                            "array": false,
+                                            "previousAttributeName": null,
+                                            "attributeType": null,
+                                            "attributeName": "field",
+                                            "subType": [],
+                                            "dataStoragePolicy": null
+                                        },
+                                        {
+                                            "displayName": null,
+                                            "defaultValue": null,
+                                            "precision": 0,
+                                            "autoIncrement": false,
+                                            "description": null,
+                                            "displayPolicy": null,
+                                            "type": "String",
+                                            "required": false,
+                                            "compliances": null,
+                                            "apiAccessPolicy": null,
+                                            "customType": false,
+                                            "size": 0,
+                                            "updateOption": null,
+                                            "array": false,
+                                            "previousAttributeName": null,
+                                            "attributeType": null,
+                                            "attributeName": "message",
+                                            "subType": [],
+                                            "dataStoragePolicy": null
+                                        },
+                                        {
+                                            "displayName": null,
+                                            "defaultValue": null,
+                                            "precision": 0,
+                                            "autoIncrement": false,
+                                            "description": null,
+                                            "displayPolicy": null,
+                                            "type": "String",
+                                            "required": false,
+                                            "compliances": null,
+                                            "apiAccessPolicy": null,
+                                            "customType": false,
+                                            "size": 0,
+                                            "updateOption": null,
+                                            "array": false,
+                                            "previousAttributeName": null,
+                                            "attributeType": null,
+                                            "attributeName": "code",
+                                            "subType": [],
+                                            "dataStoragePolicy": null
+                                        }
+                                    ],
+                                    "dataStoragePolicy": null
+                                }
+                            ],
+                            "sessionId": null,
+                            "timeInMillis": 1175,
+                            "body": "{\"description\":\"Validation failed\",\"errors\":[{\"field\":\"created_at\",\"message\":\"Invalid date time fields: created_at > Updated-time\",\"code\":\"invalid_value\"},{\"field\":\"updated_at\",\"message\":\"Invalid date time fields: updated_at < Created-time\",\"code\":\"invalid_value\"}]}",
+                            "cookies": {},
+                            "statusCode": 400
+                        },
+                        "type": "api-response"
+                    },
+                    "workflowRunId": "cd093a56-dd0b-4f11-abe6-b0b54801072a",
+                    "isStepDone": true,
+                    "status": "error"
+                }
+            ],
+            "logMessage": "Data transformation completed",
+            "stepId": "6340be69-917b-47dc-ad52-d73a23661cea",
+            "startTime": 1712133422666,
+            "endTime": 1712133431356,
+            "_class": "com.apiplatform.datatransformation.model.StepRun",
+            "additionalDetails": {
+                "response": {
+                    "headers": [
+                        {
+                            "name": "Date",
+                            "value": "Wed, 03 Apr 2024 08:37:10 GMT"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "name": "Transfer-Encoding",
+                            "value": "chunked"
+                        },
+                        {
+                            "name": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "name": "Status",
+                            "value": "400 Bad Request"
+                        },
+                        {
+                            "name": "Cache-Control",
+                            "value": "no-cache, no-store"
+                        },
+                        {
+                            "name": "X-Freshservice-Api-Version",
+                            "value": "latest=v2; requested=v2"
+                        },
+                        {
+                            "name": "Pragma",
+                            "value": "no-cache"
+                        },
+                        {
+                            "name": "X-Request-Id",
+                            "value": "95095ef5-3b46-443d-9032-84e71fea09af"
+                        },
+                        {
+                            "name": "Expires",
+                            "value": "Wed, 13 Oct 2010 00:00:00 UTC"
+                        },
+                        {
+                            "name": "X-Envoy-Upstream-Service-Time",
+                            "value": "66"
+                        },
+                        {
+                            "name": "X-Fw-Ratelimiting-Managed",
+                            "value": "true"
+                        },
+                        {
+                            "name": "X-Ratelimit-Total",
+                            "value": "160"
+                        },
+                        {
+                            "name": "X-Ratelimit-Remaining",
+                            "value": "159"
+                        },
+                        {
+                            "name": "X-Ratelimit-Used-Currentrequest",
+                            "value": "1"
+                        },
+                        {
+                            "name": "X-Trace-Id",
+                            "value": "00-0427441c9639cc3d2b7e1360d906ee2e-c689ce87329d880d-00"
+                        },
+                        {
+                            "name": "Nel",
+                            "value": "{ \"report_to\": \"nel-endpoint-freshservice\", \"max_age\": 2592000, \"include_subdomains\": true}"
+                        },
+                        {
+                            "name": "Report-To",
+                            "value": "{ \"group\": \"nel-endpoint-freshservice\", \"max_age\": 2592000, \"include_subdomains\": true, \"endpoints\": [{\"url\": \"https://edge-admin.ap-south-1.freshedge.net/nelreports/freshservice\"}]}"
+                        },
+                        {
+                            "name": "Server",
+                            "value": "fwe"
+                        }
+                    ],
+                    "statusLine": "HTTP/1.1 400 Bad Request",
+                    "contentLength": 266,
+                    "attributes": [
+                        {
+                            "displayName": null,
+                            "defaultValue": null,
+                            "precision": 0,
+                            "autoIncrement": false,
+                            "description": null,
+                            "displayPolicy": null,
+                            "type": "String",
+                            "required": false,
+                            "compliances": null,
+                            "apiAccessPolicy": null,
+                            "customType": false,
+                            "size": 0,
+                            "updateOption": null,
+                            "array": false,
+                            "previousAttributeName": null,
+                            "attributeType": null,
+                            "attributeName": "description",
+                            "subType": [],
+                            "dataStoragePolicy": null
+                        },
+                        {
+                            "displayName": null,
+                            "defaultValue": null,
+                            "precision": 0,
+                            "autoIncrement": false,
+                            "description": null,
+                            "displayPolicy": null,
+                            "type": "Object",
+                            "required": false,
+                            "compliances": null,
+                            "apiAccessPolicy": null,
+                            "customType": false,
+                            "size": 0,
+                            "updateOption": null,
+                            "array": true,
+                            "previousAttributeName": null,
+                            "attributeType": null,
+                            "attributeName": "errors",
+                            "subType": [
+                                {
+                                    "displayName": null,
+                                    "defaultValue": null,
+                                    "precision": 0,
+                                    "autoIncrement": false,
+                                    "description": null,
+                                    "displayPolicy": null,
+                                    "type": "String",
+                                    "required": false,
+                                    "compliances": null,
+                                    "apiAccessPolicy": null,
+                                    "customType": false,
+                                    "size": 0,
+                                    "updateOption": null,
+                                    "array": false,
+                                    "previousAttributeName": null,
+                                    "attributeType": null,
+                                    "attributeName": "field",
+                                    "subType": [],
+                                    "dataStoragePolicy": null
+                                },
+                                {
+                                    "displayName": null,
+                                    "defaultValue": null,
+                                    "precision": 0,
+                                    "autoIncrement": false,
+                                    "description": null,
+                                    "displayPolicy": null,
+                                    "type": "String",
+                                    "required": false,
+                                    "compliances": null,
+                                    "apiAccessPolicy": null,
+                                    "customType": false,
+                                    "size": 0,
+                                    "updateOption": null,
+                                    "array": false,
+                                    "previousAttributeName": null,
+                                    "attributeType": null,
+                                    "attributeName": "message",
+                                    "subType": [],
+                                    "dataStoragePolicy": null
+                                },
+                                {
+                                    "displayName": null,
+                                    "defaultValue": null,
+                                    "precision": 0,
+                                    "autoIncrement": false,
+                                    "description": null,
+                                    "displayPolicy": null,
+                                    "type": "String",
+                                    "required": false,
+                                    "compliances": null,
+                                    "apiAccessPolicy": null,
+                                    "customType": false,
+                                    "size": 0,
+                                    "updateOption": null,
+                                    "array": false,
+                                    "previousAttributeName": null,
+                                    "attributeType": null,
+                                    "attributeName": "code",
+                                    "subType": [],
+                                    "dataStoragePolicy": null
+                                }
+                            ],
+                            "dataStoragePolicy": null
+                        }
+                    ],
+                    "sessionId": null,
+                    "timeInMillis": 1175,
+                    "body": "{\"description\":\"Validation failed\",\"errors\":[{\"field\":\"created_at\",\"message\":\"Invalid date time fields: created_at > Updated-time\",\"code\":\"invalid_value\"},{\"field\":\"updated_at\",\"message\":\"Invalid date time fields: updated_at < Created-time\",\"code\":\"invalid_value\"}]}",
+                    "cookies": {},
+                    "statusCode": 400
+                },
+                "type": "api-response"
+            },
+            "workflowRunId": "cd093a56-dd0b-4f11-abe6-b0b54801072a",
+            "isStepDone": true,
+            "status": "success"
+        }
+    ]
+};
   s3URL: any;
   payload: any = {
     "name": "ZendeskToFreshService",
@@ -3036,6 +3480,15 @@ export class AppComponent {
     }
   };
 
+  public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
+  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
+      { data: [ 450, 350, 100 ], label: 'Series A' },
+    ];
+
+  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
+    responsive: false
+  };
+
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
   ngOnInit() {
@@ -5808,9 +6261,9 @@ export class AppComponent {
     }
     this.apiService.transformData(payload).subscribe(res => {
       console.log(res);
+      this.isLoading2 = false;
       if (res) {
         let item: any = res;
-        this.isLoading2 = false;
         this.workflowRunId = item.workflowRunId;
         this.isLoading3 = true;
         this.apiService.getTranformDataWorkflowDetails(this.workflowRunId).subscribe(res1 => {
