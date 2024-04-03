@@ -88,7 +88,62 @@
         </div>
       </mat-card>
     </mat-step>
-    <mat-step label="JSON Mapping" state="mapping">
+    <mat-step label="Field Mapping" state="mapping">
+      <div class="table-responsive">
+        <table class="col-lg-12 col-md-12 col-sm-12">
+            <thead>
+                <th>Target Field</th>
+                <th></th>
+                <th>Source Field</th>
+                <th>Override</th>
+                <th>
+                  <mat-icon matTooltip="Add Attribute" (click)="addAttributeField()">add_box</mat-icon>
+                    <!-- <i matTooltip="Add Attribute"
+                        class="fa fa-plus-square tour-schema-def-add-attribute"
+                        (click)="addAttributeFieldToPlan(i)"></i> -->
+                </th>
+            </thead>
+            <tbody>
+                <ng-container
+                    *ngFor="let attribute of attributes let j = index">
+                    <tr class="root">
+                        <td
+                            class="tour-schema-def-data-type">
+                            <input
+                                class="form-control attribute"
+                                [value]="attribute.targetfield"
+                                [(ngModel)]="attribute.targetfield">
+
+                        </td>
+                       
+                        <td class="text-center">
+                            <mat-icon>arrow_right_alt</mat-icon>
+                        </td>
+                        <td
+                            class="tour-schema-def-data-type">
+                            
+                            <input class="form-control"
+                                [(ngModel)]="attribute.sourcefield"
+                                type="text">
+                        </td>
+                        <td class="text-center">
+                            <mat-checkbox
+                                [checked]="attribute.isOverride"
+                                (change)="attribute.isOverride = !attribute.isOverride;">
+                            </mat-checkbox>
+                        </td>
+                        
+                        <td class="text-center">
+                          <mat-icon (click)="removeAttribute(attributes, j)">remove_circle_outline</mat-icon>
+                            
+                        </td>
+
+                    </tr>
+                </ng-container>
+
+            </tbody>
+        </table>
+    </div>
 
     </mat-step>
     <mat-step label="Migrate Data" state="data">

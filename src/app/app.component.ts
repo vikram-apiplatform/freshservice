@@ -213,14 +213,22 @@ export class AppComponent {
       "type": "string"
     }
   ];
-  domain:any;
-  apikey:any;
-  password:any;
-  file:any = {};
+  domain: any;
+  apikey: any;
+  password: any;
+  file: any = {};
   isLinear = true;
   selectedIndex = 0;
   isconnected = true;
   isLoading1 = false;
+  attributes: any = [
+    {
+      sourcefield: '',
+      targetfield: '',
+      override: [],
+      isOverride: false
+    }
+  ];
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
@@ -228,21 +236,35 @@ export class AppComponent {
 
   }
 
+  addAttributeField() {
+    let obj = {
+      sourcefield: '',
+      targetfield: '',
+      override: [],
+      isOverride: false
+    };
+    this.attributes.push(obj);
+  }
+
+  removeAttribute(data:any, index:any) {
+    data.splice(index, 1);
+}
+
   connect() {
-    if(this.domain && this.apikey && this.password) {
+    if (this.domain && this.apikey && this.password) {
       this.isLoading1 = true;
-      this.apiService.connectToFreshservice(this.domain,this.apikey,this.password).subscribe(res=>{
+      this.apiService.connectToFreshservice(this.domain, this.apikey, this.password).subscribe(res => {
         this.isconnected = false;
         this.isLoading1 = false;
-        this.apiService.openSnackBar('Successfully connected to Freshservice.','x');
-      },err=>{
+        this.apiService.openSnackBar('Successfully connected to Freshservice.', 'x');
+      }, err => {
         this.isconnected = false;
         this.isLoading1 = false;
-        this.apiService.openSnackBar('Error while connecting to Freshservice.' + err['message'],'x');
+        this.apiService.openSnackBar('Error while connecting to Freshservice.' + err['message'], 'x');
       })
 
     } else {
-      this.apiService.openSnackBar('Please provide the required details','x');
+      this.apiService.openSnackBar('Please provide the required details', 'x');
     }
   }
 
@@ -294,29 +316,29 @@ export class AppComponent {
     });
   }
 
-  
 
-  onFileDropped(file:any) {
+
+  onFileDropped(file: any) {
     this.file['item'] = file[0];
     this.file['progress'] = 0;
   }
-  
 
-fileBrowseHandler(inputElement: HTMLInputElement) {
-  const files = inputElement.files;
-  if (files && files.length > 0) {
-    const selectedFile = files[0];
-    this.file = {
-      item: selectedFile,
-      progress: 0
-    };
+
+  fileBrowseHandler(inputElement: HTMLInputElement) {
+    const files = inputElement.files;
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
+      this.file = {
+        item: selectedFile,
+        progress: 0
+      };
+    }
   }
-}
 
-fileInputChange(event: any) {
-  const inputElement = event.target as HTMLInputElement;
-  this.fileBrowseHandler(inputElement);
-}
+  fileInputChange(event: any) {
+    const inputElement = event.target as HTMLInputElement;
+    this.fileBrowseHandler(inputElement);
+  }
 
   deleteFile() {
     if (confirm('Are you sure you want to delete this file?')) {

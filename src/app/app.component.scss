@@ -55,4 +55,65 @@
   }
   
 
- 
+  table {
+    border: 1px solid #ccc;
+  }
+  
+  th{
+    text-align: center;
+  }
+  
+  td, th {
+    padding: 4px;
+  }
+  
+  tr {
+    border: none
+  }
+  
+  thead {
+    border: 1px solid #ccc;
+    background: #d0cfcde0;
+  }
+  
+  .plan-card {
+    display: flex;
+    margin: 10px;
+  }
+  
+  .rm-plan {
+    display: inline-flex;
+    justify-content: flex-end;
+  }
+  
+  .tp-hc {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .tp-h {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .tp-c {
+    border: 1px solid #e3e2e2;
+  }
+  
+  .tp-hr {
+    margin: 0px !important;
+    padding: 10px;
+    background-color: #e3e2e2;
+  }
+  
+  .rm-p-i {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    font-size: 15px;
+  }
+  
+  .q-rl {
+    font-weight: bold;
+  }
