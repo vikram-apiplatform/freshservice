@@ -28,10 +28,9 @@ export class ApiService {
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('columns', columns);
+    formData.append('columns', JSON.stringify(columns));
 
     const headers = new HttpHeaders();
-    headers.set('Content-Type', 'multipart/form-data');
 
     const url = 'https://transformer.apiplatform.io/v1/validate/csv';
     return this.http.post(url, formData, { headers })

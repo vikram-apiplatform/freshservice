@@ -1,17 +1,52 @@
 <app-header></app-header>
 <div class="container" style="background-color: #f8f9fa; margin: 1rem;">
-  <mat-stepper #stepper>
+  <mat-stepper #stepper [linear]="isLinear" [selectedIndex]="selectedIndex">
     <mat-step label="Upload CSV" state="scan">
-      <mat-card>
+      <mat-card style="width: 400px;margin: auto;background-color: #f8f9fa;">
         <p class="source-txt">Kindly select the source CSV file</p>
-        <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
+        <div>
+          <mat-card *ngIf="file && !file['item']" class="drag-drop-container inner-card m5">
+            <div class="drag-drop-inner-container" (click)="fileInput.click()" appDragDrop
+              (onFileDropped)="onFileDropped($event)">
+              <input hidden type="file" #fileInput (change)="fileInputChange($event)">
+              <h3>Drag and drop file here</h3>
+              <img class="sty" src="../../assets/cloud-upload.png" width="50" height="50">
+              <h3>or</h3>
+              <button mat-raised-button color="primary">Upload CSV</button>
+            </div>
+          </mat-card>
+          <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            <mat-card *ngIf="file && file['item']" class="file-container inner-card m5">
+              <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8" style="display: flex; align-items: center">
+                <span class="fileName"> {{ file['item'].name }} </span>
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 file-action-container"
+                style="display: flex; justify-content: flex-end">
+                <button mat-raised-button *ngIf="file && file['item']" class="apiplatform-btn-2"
+                  (click)="scanFile()">
+                  Scan
+                </button>
+                <span class="material-icons" (click)="deleteFile()" style="margin: 0 5px ">
+                  delete
+                </span>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+
+
+        <!-- <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
           <button mat-raised-button (click)="uploadFile()">
             Select File
           </button>
-        </div>
+          <button mat-raised-button matStepperNext>
+            Proceed to Next
+          </button>
+        </div> -->
       </mat-card>
     </mat-step>
-    <mat-step label="Ready to Import" state="upload">
+    <!-- <mat-step label="Ready to Import" state="upload">
       <mat-card>
         <p class="source-txt">CSV file has been scanned successfully.</p>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
@@ -20,7 +55,7 @@
           </button>
         </div>
       </mat-card>
-    </mat-step>
+    </mat-step> -->
     <mat-step label="Connect Fresh Service" state="connect">
       <mat-card style="width: 400px;margin: auto;">
         <p class="source-txt">Configure API Key</p>
@@ -31,7 +66,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput  [(ngModel)]="password">
+            <input matInput [(ngModel)]="password">
           </mat-form-field>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
@@ -39,7 +74,7 @@
             Connect
           </button>
           <button mat-raised-button matStepperNext>
-            Proceed to Next 
+            Proceed to Next
           </button>
         </div>
       </mat-card>
@@ -51,7 +86,7 @@
       <mat-card>
         <p class="source-txt">Everything is setup to migrate data</p>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
-          <button mat-raised-button >
+          <button mat-raised-button>
             Proceed Migration
           </button>
         </div>

@@ -215,12 +215,35 @@ export class AppComponent {
   ];
   apikey:any;
   password:any;
-  file:any;
+  file:any = {};
+  isLinear = true;
+  selectedIndex = 0;
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
   ngOnInit() {
 
+  }
+
+  scanFile() {
+    console.log(this.file);
+    console.log(this.file.item);
+    if (this.file && this.file.item) {
+      this.apiService.uploadCSV(this.file.item, this.columns).subscribe(res => {
+        console.log(res);
+        this.apiService.openSnackBar('Upload successful', 'Success');
+      }, err => {
+        console.log(err);
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar(err, 'Error');
+      })
+    }
   }
 
   uploadFile() {
@@ -248,5 +271,35 @@ export class AppComponent {
         reader.readAsText(file);
       }
     });
+  }
+
+  
+
+  onFileDropped(file:any) {
+    this.file['item'] = file[0];
+    this.file['progress'] = 0;
+  }
+  
+
+fileBrowseHandler(inputElement: HTMLInputElement) {
+  const files = inputElement.files;
+  if (files && files.length > 0) {
+    const selectedFile = files[0];
+    this.file = {
+      item: selectedFile,
+      progress: 0
+    };
+  }
+}
+
+fileInputChange(event: any) {
+  const inputElement = event.target as HTMLInputElement;
+  this.fileBrowseHandler(inputElement);
+}
+
+  deleteFile() {
+    if (confirm('Are you sure you want to delete this file?')) {
+      this.file = {};
+    }
   }
 }
