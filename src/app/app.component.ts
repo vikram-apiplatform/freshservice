@@ -220,6 +220,7 @@ export class AppComponent {
   isLinear = true;
   selectedIndex = 0;
   isconnected = true;
+  isLoading1 = false;
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
@@ -229,16 +230,19 @@ export class AppComponent {
 
   connect() {
     if(this.domain && this.apikey && this.password) {
+      this.isLoading1 = true;
       this.apiService.connectToFreshservice(this.domain,this.apikey,this.password).subscribe(res=>{
         this.isconnected = false;
+        this.isLoading1 = false;
         this.apiService.openSnackBar('Successfully connected to Freshservice.','x');
       },err=>{
         this.isconnected = false;
+        this.isLoading1 = false;
         this.apiService.openSnackBar('Error while connecting to Freshservice.' + err['message'],'x');
       })
 
     } else {
-      this.apiService.openSnackBar('Please Provide the required details','x');
+      this.apiService.openSnackBar('Please provide the required details','x');
     }
   }
 

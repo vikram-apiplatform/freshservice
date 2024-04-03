@@ -75,7 +75,12 @@
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
           <button mat-raised-button style="margin-right: 10px;" color="primary" (click)="connect()">
-            Connect
+            <span *ngIf="!isLoading1">Connect </span>
+            <span *ngIf="isLoading1">
+                <img src="../assets/button_loading.gif" class="img img-responsive button_loading"
+                    style="width: 20px;">
+            </span>
+            
           </button>
           <button mat-raised-button matStepperNext color="primary" [disabled]="isconnected">
             Proceed to Next
