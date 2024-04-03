@@ -4,7 +4,7 @@
     <mat-step label="Upload CSV" state="scan">
       <mat-card style="width: 450px;margin: auto;background-color: #f8f9fa;">
         <p class="source-txt"> <span *ngIf="file && !file['item']">Please upload the source CSV file</span>
-          <span *ngIf="file &&file['item']">Thank You for uploading CSV</span>
+          <span *ngIf="file &&file['item']">Thank you for uploading CSV</span>
         </p>
         <mat-checkbox style="font-size: 12px;margin-bottom: 10px;" [checked]="autoScan"
           (change)="autoScan = !autoScan;"> Auto-Scan CSV
@@ -41,7 +41,8 @@
                   </span>
                 </button>
                 <button color="primary" matStepperNext mat-raised-button
-                  *ngIf="file && file['item'] && (autoScan || isAutoScanDone)" class="apiplatform-btn-2">
+                  *ngIf="file && file['item'] && (autoScan || isAutoScanDone)" class="apiplatform-btn-2"
+                  [disabled]="scanResult && scanResult.isError">
                   Import
                 </button>
                 <span class="material-icons" (click)="deleteFile()" style="margin: 0 5px ">
@@ -72,13 +73,25 @@
         </div> -->
       </mat-card>
       <div *ngIf="isAutoScanDone && scanResult">
-        <div class="d-flex justify-content-between" style="margin-top: 2rem;">
-          <div>
-            <p class="source-txt" *ngIf="scanResult && scanResult.isError">Error Logs</p>
+        <div class="d-flex justify-content-between" style="margin-top: 2rem;" *ngIf="scanResult && scanResult.isError">
+          <div >
+            <p class="source-txt" >Error Logs</p>
           </div>
           <div>
             <p class="source-txt">Status :
               <span style="font-size: 13px;font-weight: 300;" *ngIf="scanResult && scanResult.isError">Error</span>
+              <span style="font-size: 13px;font-weight: 300;" *ngIf="scanResult && !scanResult.isError">Success</span>
+            </p>
+          </div>
+          <div>
+            <p class="source-txt" style="margin-left: 2rem;">Duration : <span
+                style="font-size: 13px;font-weight: 300;">{{scanResult.durationInSeconds}}</span>s</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center" style="margin-top: 2rem;" *ngIf="scanResult && !scanResult.isError">
+          
+          <div>
+            <p class="source-txt">Status :
               <span style="font-size: 13px;font-weight: 300;" *ngIf="scanResult && !scanResult.isError">Success</span>
             </p>
           </div>
