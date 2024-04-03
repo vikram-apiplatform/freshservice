@@ -52,5 +52,21 @@ export class ApiService {
   }
 
 
+  getTranformDataWorkflowDetails(workflowRunId: any) {
+    const coreOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'pkey': '3feee3f13ffecbc23fdcb845d0b9359a',
+        'apikey': 'WroK6tWEFqf6lOtO7J1qJPXCZUc8Ai24',
+        'Access-Control-Allow-Origin': '*',
+        'observe': 'response'
+      })
+    };
+    const url = 'https://core.gateway.apiplatform.io/v1/workflowRun?workflowRunId=' + workflowRunId;
+    return this.http.get(url, coreOptions)
+      .pipe(map(res => res));
+  }
+
+
 
 }

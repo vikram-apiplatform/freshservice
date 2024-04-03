@@ -74,8 +74,8 @@
       </mat-card>
       <div *ngIf="isAutoScanDone && scanResult">
         <div class="d-flex justify-content-between" style="margin-top: 2rem;" *ngIf="scanResult && scanResult.isError">
-          <div >
-            <p class="source-txt" >Error Logs</p>
+          <div>
+            <p class="source-txt">Error Logs</p>
           </div>
           <div>
             <p class="source-txt">Status :
@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-center" style="margin-top: 2rem;" *ngIf="scanResult && !scanResult.isError">
-          
+
           <div>
             <p class="source-txt">Status :
               <span style="font-size: 13px;font-weight: 300;" *ngIf="scanResult && !scanResult.isError">Success</span>
@@ -222,10 +222,11 @@
               <th scope="col">Target Field</th>
               <th scope="col">Source Field</th>
               <th scope="col">Override</th>
-              <th scope="col"> <mat-icon matTooltip="Add Attribute" (click)="addAttributeField()">add_box</mat-icon></th>
+              <th scope="col"> <mat-icon matTooltip="Add Attribute" (click)="addAttributeField()">add_box</mat-icon>
+              </th>
             </tr>
           </thead>
-          
+
           <tbody>
             <ng-container *ngFor="let attribute of attributes; let j = index">
               <tr class="root">
@@ -235,7 +236,7 @@
 
                 </td>
 
-                
+
                 <td class="tour-schema-def-data-type">
 
                   <input class="form-control" [(ngModel)]="attribute.sourcefield" type="text">
@@ -302,9 +303,32 @@
           <img class="sty" src="../assets/transform.jpg" width="150" height="150">
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
-          <button mat-raised-button color="primary">
-            Proceed Transformation
+          <button mat-raised-button color="primary" (click)="TransformData()">
+
+            <span *ngIf="!isLoading2">Transform Data </span>
+            <span *ngIf="isLoading2">
+              <img src="../assets/button_loading.gif" class="img img-responsive button_loading" style="width: 20px;">
+            </span>
           </button>
+        </div>
+      </mat-card>
+    </mat-step>
+    <mat-step label="Result" state="result">
+      <mat-card style="width: 450px;margin: auto;">
+        <p class="source-txt">Data Transformation Results</p>
+        <div *ngIf="workflowRunData">
+          <div class="d-flex justify-content-between">
+            <div>Run Id :</div>
+            <div>{{workflowRunData['workflowRunId']}}</div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>Start Time :</div>
+            <div>{{getFormattedTime(workflowRunData['startTime'])}}</div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>Total Records :</div>
+            <div>{{workflowRunData['totalRecords']}}</div>
+          </div>
         </div>
       </mat-card>
     </mat-step>
@@ -322,6 +346,9 @@
       <mat-icon>list_alt</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="data">
+      <mat-icon>autorenew</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="result">
       <mat-icon>send</mat-icon>
     </ng-template>
   </mat-stepper>

@@ -4,6 +4,7 @@ import { ImportFileDialogComponent } from './import-file-dialog/import-file-dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from './api.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-root',
@@ -227,14 +228,43 @@ export class AppComponent {
   isconnected = false;
   connectionResult = '';
   isLoading1 = false;
+  isLoading2 = false;
   attributes: any = [];
   expandedRows: string[] = [];
-  scanResult:any = {};
+  scanResult: any = {};
+  workflowRunId: any = 'd1c1959e-1a62-44d9-b75e-dd6a6fb74dd3';
+  workflowRunData: any;
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
   ngOnInit() {
 
+  }
+
+  TransformData() {
+    this.isLoading2 = true;
+    this.apiService.getTranformDataWorkflowDetails(this.workflowRunId).subscribe(res => {
+      this.isLoading2 = false;
+      if (res) {
+        this.workflowRunData = res;
+        console.log(this.workflowRunData);
+        this.selectedIndex = 4;
+      }
+    }, err => {
+      this.isLoading2 = false;
+    })
+  }
+
+  getFormattedTime(timestamp: any) {
+    let date = new Date(timestamp);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let formatted_date = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}-${year} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return formatted_date;
   }
 
   removeOverride(item: any, index: number): void {
@@ -311,28 +341,28 @@ export class AppComponent {
           "isError": true,
           "durationInSeconds": 0.010470167,
           "errors": [
-              {
-                  "column": "ContactPhone",
-                  "row": 1,
-                  "type": "invalid-phone"
-              },
-              {
-                  "column": "Subject",
-                  "row": 4,
-                  "type": "data-missing"
-              },
-              {
-                  "column": "Description",
-                  "row": 4,
-                  "type": "data-missing"
-              },
-              {
-                  "column": "Subject",
-                  "row": 5,
-                  "type": "data-missing"
-              }
+            {
+              "column": "ContactPhone",
+              "row": 1,
+              "type": "invalid-phone"
+            },
+            {
+              "column": "Subject",
+              "row": 4,
+              "type": "data-missing"
+            },
+            {
+              "column": "Description",
+              "row": 4,
+              "type": "data-missing"
+            },
+            {
+              "column": "Subject",
+              "row": 5,
+              "type": "data-missing"
+            }
           ]
-       };
+        };
         console.log(err);
         this.apiService.openSnackBar('Error while scanning CSV', 'Error');
       })
@@ -395,7 +425,7 @@ export class AppComponent {
         progress: 0
       };
     }
-    if(this.autoScan) {
+    if (this.autoScan) {
       this.scanFile();
     }
 
