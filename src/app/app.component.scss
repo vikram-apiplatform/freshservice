@@ -135,3 +135,18 @@ thead {
 ::-webkit-scrollbar-thumb {
   background: #eee
 }
+
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr {
+  height: 40px; 
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

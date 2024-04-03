@@ -114,16 +114,24 @@
         <div class="row">
           <mat-form-field appearance="outline">
             <mat-label>Domain</mat-label>
-            <input matInput [(ngModel)]="domain">
+            <input matInput [(ngModel)]="domain" required>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>API Key</mat-label>
-            <input matInput [(ngModel)]="apikey">
+            <input matInput [(ngModel)]="apikey" required>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput [(ngModel)]="password">
           </mat-form-field>
+        </div>
+        <div class="d-flex flex-row" *ngIf="isconnected">
+          <div style="margin-right: 5px;">
+            <mat-icon style="color: green;">cloud_done</mat-icon>
+          </div>
+          <div>
+            <p class="source-txt">Configuration successful.</p>
+          </div>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
           <button *ngIf="!isconnected" mat-raised-button style="margin-right: 10px;" (click)="connect()"
@@ -189,19 +197,16 @@
         </div>
       </mat-card>
       <div class="table-responsive" style="height: 80vh;overflow-y: auto;margin-top: 10px;">
-        <table class="col-lg-12 col-md-12 col-sm-12">
+        <table class="table">
           <thead>
-            <th>Target Field</th>
-            <th></th>
-            <th>Source Field</th>
-            <th>Override</th>
-            <th>
-              <mat-icon matTooltip="Add Attribute" (click)="addAttributeField()">add_box</mat-icon>
-              <!-- <i matTooltip="Add Attribute"
-                        class="fa fa-plus-square tour-schema-def-add-attribute"
-                        (click)="addAttributeFieldToPlan(i)"></i> -->
-            </th>
+            <tr>
+              <th scope="col">Target Field</th>
+              <th scope="col">Source Field</th>
+              <th scope="col">Override</th>
+              <th scope="col"> <mat-icon matTooltip="Add Attribute" (click)="addAttributeField()">add_box</mat-icon></th>
+            </tr>
           </thead>
+          
           <tbody>
             <ng-container *ngFor="let attribute of attributes; let j = index">
               <tr class="root">
@@ -211,14 +216,12 @@
 
                 </td>
 
-                <td class="text-center">
-                  <mat-icon>arrow_right_alt</mat-icon>
-                </td>
+                
                 <td class="tour-schema-def-data-type">
 
                   <input class="form-control" [(ngModel)]="attribute.sourcefield" type="text">
                 </td>
-                <td class="text-center">
+                <td>
                   <!-- <mat-checkbox
                                 [checked]="attribute.isOverride"
                                 (change)="attribute.isOverride = !attribute.isOverride;">
@@ -229,7 +232,7 @@
 
                 </td>
 
-                <td class="text-center">
+                <td>
                   <mat-icon (click)="removeAttribute(attributes, j)">remove_circle</mat-icon>
 
                 </td>
