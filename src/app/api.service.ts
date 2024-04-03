@@ -41,10 +41,10 @@ export class ApiService {
       .pipe(map(res => res));
   }
 
-  connectToFreshservice(domain: any, apikey: any, password:any) {
+  connectToFreshservice(domain: any, apikey: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa(apikey + ':' + password)
+      'Authorization': 'Basic ' + btoa(apikey + ':')
     });
     const url = 'https://' + domain + '.freshservice.com/api/v2/tickets'
     return this.http.get(url, { headers: headers })

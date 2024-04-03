@@ -120,17 +120,23 @@
             <mat-label>API Key</mat-label>
             <input matInput [(ngModel)]="apikey" required>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput [(ngModel)]="password">
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
         <div class="d-flex flex-row" *ngIf="isconnected">
           <div style="margin-right: 5px;">
-            <mat-icon style="color: green;">cloud_done</mat-icon>
+            <mat-icon style="color: green;" *ngIf="connectionResult == 'success'">
+              cloud_done
+            </mat-icon>
+            <mat-icon style="color: red;font-size: 20px;" *ngIf="connectionResult == 'failed'">
+              cancel
+            </mat-icon>
           </div>
           <div>
-            <p class="source-txt">Configuration successful.</p>
+            <p class="source-txt" *ngIf="connectionResult == 'success'">Configuration successful</p>
+            <p class="source-txt" *ngIf="connectionResult == 'failed'">Configuration Invalid</p>
           </div>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">

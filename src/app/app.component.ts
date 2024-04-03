@@ -225,6 +225,7 @@ export class AppComponent {
   isLinear = true;
   selectedIndex = 0;
   isconnected = false;
+  connectionResult = '';
   isLoading1 = false;
   attributes: any = [];
   expandedRows: string[] = [];
@@ -298,15 +299,17 @@ export class AppComponent {
   }
 
   connect() {
-    if (this.domain && this.apikey && this.password) {
+    if (this.domain && this.apikey) {
       this.isLoading1 = true;
-      this.apiService.connectToFreshservice(this.domain, this.apikey, this.password).subscribe(res => {
+      this.apiService.connectToFreshservice(this.domain, this.apikey).subscribe(res => {
         this.isconnected = true;
         this.isLoading1 = false;
+        this.connectionResult = 'success';
         this.apiService.openSnackBar('Successfully connected to Freshservice.', 'x');
       }, err => {
         this.isconnected = true;
         this.isLoading1 = false;
+        this.connectionResult = 'failed';
         this.apiService.openSnackBar('Error while connecting to Freshservice.' + err['message'], 'x');
       })
 
