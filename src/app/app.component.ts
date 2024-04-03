@@ -6548,6 +6548,7 @@ export class AppComponent {
     if (confirm('Are you sure you want to delete this file?')) {
       this.file = {};
       this.scanResult = undefined;
+      this.isAutoScanDone = false;
     }
   }
 
