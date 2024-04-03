@@ -225,7 +225,7 @@ export class AppComponent {
   jsonfile: any = {};
   importJson = false;
   isLinear = true;
-  selectedIndex = 4;
+  selectedIndex = 0;
   isconnected = false;
   connectionResult = '';
   isLoading1 = false;
