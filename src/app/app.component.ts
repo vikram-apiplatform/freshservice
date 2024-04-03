@@ -213,16 +213,33 @@ export class AppComponent {
       "type": "string"
     }
   ];
+  domain:any;
   apikey:any;
   password:any;
   file:any = {};
   isLinear = true;
   selectedIndex = 0;
+  isconnected = true;
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
   ngOnInit() {
 
+  }
+
+  connect() {
+    if(this.domain && this.apikey && this.password) {
+      this.apiService.connectToFreshservice(this.domain,this.apikey,this.password).subscribe(res=>{
+        this.isconnected = false;
+        this.apiService.openSnackBar('Successfully connected to Freshservice.','x');
+      },err=>{
+        this.isconnected = false;
+        this.apiService.openSnackBar('Error while connecting to Freshservice.' + err['message'],'x');
+      })
+
+    } else {
+      this.apiService.openSnackBar('Please Provide the required details','x');
+    }
   }
 
   scanFile() {

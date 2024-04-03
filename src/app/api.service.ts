@@ -11,7 +11,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ApiService {
 
-
+  httpOptions: any = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
   constructor(private http: HttpClient, public _snackBar: MatSnackBar) {
 
   }
@@ -34,6 +38,16 @@ export class ApiService {
 
     const url = 'https://transformer.apiplatform.io/v1/validate/csv';
     return this.http.post(url, formData, { headers })
+      .pipe(map(res => res));
+  }
+
+  connectToFreshservice(domain: any, apikey: any, password:any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(apikey + ':' + password)
+    });
+    const url = 'https://' + domain + '.freshservice.com/api/v2/tickets'
+    return this.http.get(url, { headers: headers })
       .pipe(map(res => res));
   }
 

@@ -61,6 +61,10 @@
         <p class="source-txt">Configure API Key</p>
         <div class="row">
           <mat-form-field appearance="outline">
+            <mat-label>Domain</mat-label>
+            <input matInput [(ngModel)]="domain">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>API Key</mat-label>
             <input matInput [(ngModel)]="apikey">
           </mat-form-field>
@@ -70,10 +74,10 @@
           </mat-form-field>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
-          <button mat-raised-button style="margin-right: 10px;">
+          <button mat-raised-button style="margin-right: 10px;" color="primary" (click)="connect()">
             Connect
           </button>
-          <button mat-raised-button matStepperNext>
+          <button mat-raised-button matStepperNext color="primary" [disabled]="isconnected">
             Proceed to Next
           </button>
         </div>
