@@ -395,27 +395,37 @@
           </button>
         </div>
         <p *ngIf="isLoading2" class="source-txt" style="margin-top: 1rem;">
-          Scanning...</p>
+          Processing...</p>
       </mat-card>
     </mat-step>
 
     <mat-step label="Result" state="result">
-      <mat-card style="width: 450px;margin: auto;">
+      <mat-card>
         <p class="source-txt">Data Transformation Results</p>
-        <div *ngIf="workflowRunData">
-          <div class="d-flex justify-content-between">
-            <div>Run Id :</div>
-            <div>{{workflowRunData['workflowRunId']}}</div>
+        <div class="row col-12">
+          <div class="col-4">
+            <div *ngIf="workflowRunData">
+              <div class="d-flex justify-content-between">
+                <div>Run Id :</div>
+                <div>{{workflowRunData['workflowRunId']}}</div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div>Start Time :</div>
+                <div>{{getFormattedTime(workflowRunData['startTime'])}}</div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div>Total Records :</div>
+                <div>{{workflowRunData['totalRecords']}}</div>
+              </div>
+            </div>
           </div>
-          <div class="d-flex justify-content-between">
-            <div>Start Time :</div>
-            <div>{{getFormattedTime(workflowRunData['startTime'])}}</div>
-          </div>
-          <div class="d-flex justify-content-between">
-            <div>Total Records :</div>
-            <div>{{workflowRunData['totalRecords']}}</div>
+          <div>
+            <!-- <canvas baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType" [colors]="colors"
+            [options]="options" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas> -->
           </div>
         </div>
+        
       </mat-card>
     </mat-step>
 

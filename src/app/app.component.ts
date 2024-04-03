@@ -3004,6 +3004,38 @@ export class AppComponent {
     ]
   };
 
+  chartLabels: string[] = ['Passed', 'Failed', 'Skipped'];
+  chartData: any = [5, 2, 0];
+  chartType = 'doughnut';
+  colors: any = [
+    {
+      backgroundColor: [
+        '#36A2EB',
+        '#FF6384',
+        '#FFCD56'
+      ]
+    }
+  ];
+  options: any = {
+    legend: {
+      display: true,
+      position: 'right'
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Migration Report',
+        padding: {
+          top: 10,
+          bottom: 30
+        }
+      },
+      datalabels: {
+        display: true
+      }
+    }
+  };
+
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
   ngOnInit() {
@@ -5949,6 +5981,14 @@ export class AppComponent {
         reader.readAsText(file);
       }
     });
+  }
+
+  public chartClicked(e:any) {
+    // console.log(e);
+  }
+
+  public chartHovered(e:any) {
+    // console.log(e);
   }
 
 
