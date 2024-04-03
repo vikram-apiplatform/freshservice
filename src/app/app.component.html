@@ -96,8 +96,8 @@
             </p>
           </div>
           <div>
-            <p class="source-txt" style="margin-left: 2rem;">Duration : <span
-                style="font-size: 13px;font-weight: 300;">{{scanResult.durationInSeconds}}</span>s</p>
+            <p class="source-txt" style="margin-left: 2rem;">Message : <span
+                style="font-size: 13px;font-weight: 300;">{{scanResult.message}}</span></p>
           </div>
         </div>
         <div class="table-responsive" *ngIf="scanResult && scanResult.isError">
@@ -153,7 +153,7 @@
           </div>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
-          <button *ngIf="!isconnected" mat-raised-button style="margin-right: 10px;" (click)="connect()"
+          <button  mat-raised-button style="margin-right: 10px;" (click)="connect()"
             color="primary">
             <span *ngIf="!isLoading1">Connect </span>
             <span *ngIf="isLoading1">
@@ -161,12 +161,13 @@
             </span>
 
           </button>
-          <button *ngIf="isconnected" mat-raised-button matStepperNext color="primary">
+          <button *ngIf="isconnected" mat-raised-button matStepperNext color="primary" [disabled]="connectionResult !== 'success'">
             Proceed to Field Mapping
           </button>
         </div>
       </mat-card>
     </mat-step>
+
     <mat-step label="Field Mapping" state="mapping">
 
       <mat-card style="width: 450px;margin: auto;background-color: #f8f9fa;">
@@ -296,6 +297,7 @@
       </div>
 
     </mat-step>
+
     <mat-step label="Transformation" state="data">
       <mat-card>
         <p class="source-txt">Everything is setup to transform data</p>
@@ -311,8 +313,11 @@
             </span>
           </button>
         </div>
+        <p *ngIf="isLoading2" class="source-txt" style="margin-top: 1rem;">
+          Scanning...</p>
       </mat-card>
     </mat-step>
+
     <mat-step label="Result" state="result">
       <mat-card style="width: 450px;margin: auto;">
         <p class="source-txt">Data Transformation Results</p>

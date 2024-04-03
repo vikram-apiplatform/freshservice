@@ -28,6 +28,18 @@ export class ApiService {
     });
   }
 
+  validateS3CSV(payload:any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    });
+    const url = environment.transformHost+ '/v1/validate/csv/url'
+    return this.http.post(url, payload, { headers: headers })
+      .pipe(map(res => res));
+  }
+
+  
+
   uploadCSV(file: File, columns: any): Observable<any> {
 
     const formData = new FormData();
@@ -36,7 +48,7 @@ export class ApiService {
 
     const headers = new HttpHeaders();
 
-    const url = 'https://transformer.apiplatform.io/v1/validate/csv';
+    const url = environment.transformHost+'/v1/validate/csv';
     return this.http.post(url, formData, { headers })
       .pipe(map(res => res));
   }
@@ -64,6 +76,27 @@ export class ApiService {
     };
     const url = 'https://core.gateway.apiplatform.io/v1/workflowRun?workflowRunId=' + workflowRunId;
     return this.http.get(url, coreOptions)
+      .pipe(map(res => res));
+  }
+
+  uploadToS3(file: File)  {
+    const formData = new FormData();
+    formData.append('multipartFile', file);
+    const headers = new HttpHeaders({
+      'pkey': '3fe0995209f5abcd3fe237286f32afa5',
+    });
+    const url = 'https://services.apiplatform.io/v1/data/hari/hari/uploadfiletopartneraccount?folder=saasgenie';
+    return this.http.post(url, formData, { headers })
+      .pipe(map(res => res));
+  }
+
+  transformData(payload:any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    });
+    const url = environment.transformHost+ '/v1/migrate'
+    return this.http.post(url, payload, { headers: headers })
       .pipe(map(res => res));
   }
 
