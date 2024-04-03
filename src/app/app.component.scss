@@ -1,119 +1,137 @@
 .mat-stepper-horizontal {
-    margin-top: 8px;
-  }
-  
-  .mat-form-field {
-    margin-top: 16px;
-  }
+  margin-top: 8px;
+}
 
-  .source-txt {
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-  }
+.mat-form-field {
+  margin-top: 16px;
+}
 
-  .close-icon {
-    color: red;
-    float: right;
-    font-size: 1rem
-  }
-  
-  .drag-drop-container {
-    text-align: center;
-    justify-content: center;
-  }
-  
-  .drag-drop-inner-container {
-    padding: 10px;
-    height: 40%
-  }
-  
-  .fileName {
-    display: inline-block;
-    width: 300px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .file-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  
-  .file-action-container {
-    padding: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .material-icons {
-    cursor: pointer;
-  }
-  
+.source-txt {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
 
-  table {
-    border: 1px solid #ccc;
-  }
-  
-  th{
-    text-align: center;
-  }
-  
-  td, th {
-    padding: 4px;
-  }
-  
-  tr {
-    border: none
-  }
-  
-  thead {
-    border: 1px solid #ccc;
-    background: #d0cfcde0;
-  }
-  
-  .plan-card {
-    display: flex;
-    margin: 10px;
-  }
-  
-  .rm-plan {
-    display: inline-flex;
-    justify-content: flex-end;
-  }
-  
-  .tp-hc {
-    width: 100%;
-    padding: 10px;
-  }
-  
-  .tp-h {
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-  }
-  
-  .tp-c {
-    border: 1px solid #e3e2e2;
-  }
-  
-  .tp-hr {
-    margin: 0px !important;
-    padding: 10px;
-    background-color: #e3e2e2;
-  }
-  
-  .rm-p-i {
-    position: absolute;
-    right: -5px;
-    top: -5px;
-    font-size: 15px;
-  }
-  
-  .q-rl {
-    font-weight: bold;
-  }
+.close-icon {
+  color: red;
+  float: right;
+  font-size: 1rem
+}
+
+.drag-drop-container {
+  text-align: center;
+  justify-content: center;
+}
+
+.drag-drop-inner-container {
+  padding: 10px;
+  height: 40%
+}
+
+.fileName {
+  display: inline-block;
+  width: 300px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.file-action-container {
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.material-icons {
+  cursor: pointer;
+}
+
+
+table {
+  border: 1px solid #ccc;
+}
+
+th {
+  text-align: center;
+}
+
+td,
+th {
+  padding: 4px;
+}
+
+tr {
+  border: none
+}
+
+thead {
+  border: 1px solid #ccc;
+  background: #d0cfcde0;
+}
+
+.plan-card {
+  display: flex;
+  margin: 10px;
+}
+
+.rm-plan {
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.tp-hc {
+  width: 100%;
+  padding: 10px;
+}
+
+.tp-h {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.tp-c {
+  border: 1px solid #e3e2e2;
+}
+
+.tp-hr {
+  margin: 0px !important;
+  padding: 10px;
+  background-color: #e3e2e2;
+}
+
+.rm-p-i {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  font-size: 15px;
+}
+
+.q-rl {
+  font-weight: bold;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 2em
+}
+
+::-webkit-scrollbar-button {
+  background: #ccc
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #fff
+}
+
+::-webkit-scrollbar-thumb {
+  background: #eee
+}

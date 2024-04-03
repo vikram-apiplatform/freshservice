@@ -213,22 +213,21 @@ export class AppComponent {
       "type": "string"
     }
   ];
+  autoScan = true;
+  isScanning = false;
+  isAutoScanDone = false;
   domain: any;
   apikey: any;
   password: any;
   file: any = {};
+  jsonfile: any = {};
+  importJson = false;
   isLinear = true;
   selectedIndex = 0;
-  isconnected = true;
+  isconnected = false;
   isLoading1 = false;
-  attributes: any = [
-    {
-      sourcefield: '',
-      targetfield: '',
-      override: [],
-      isOverride: false
-    }
-  ];
+  attributes: any = [];
+  expandedRows: string[] = [];
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
@@ -236,29 +235,51 @@ export class AppComponent {
 
   }
 
+  removeOverride(item: any, index: number): void {
+    if (item.override) {
+      item.override.splice(index, 1);
+    }
+  }
+
+  addOverride(item: any): void {
+    if (!item.override) {
+      item.override = [];
+    }
+    item.override.push({ "sourcevalue": "", "targetvalue": "" });
+  }
+
+  toggleCollapse(sourcefield: string): void {
+    const index = this.expandedRows.indexOf(sourcefield);
+    if (index > -1) {
+      this.expandedRows.splice(index, 1);
+    } else {
+      this.expandedRows.push(sourcefield);
+    }
+    console.log(this.expandedRows);
+  }
+
   addAttributeField() {
     let obj = {
       sourcefield: '',
       targetfield: '',
       override: [],
-      isOverride: false
     };
     this.attributes.push(obj);
   }
 
-  removeAttribute(data:any, index:any) {
+  removeAttribute(data: any, index: any) {
     data.splice(index, 1);
-}
+  }
 
   connect() {
     if (this.domain && this.apikey && this.password) {
       this.isLoading1 = true;
       this.apiService.connectToFreshservice(this.domain, this.apikey, this.password).subscribe(res => {
-        this.isconnected = false;
+        this.isconnected = true;
         this.isLoading1 = false;
         this.apiService.openSnackBar('Successfully connected to Freshservice.', 'x');
       }, err => {
-        this.isconnected = false;
+        this.isconnected = true;
         this.isLoading1 = false;
         this.apiService.openSnackBar('Error while connecting to Freshservice.' + err['message'], 'x');
       })
@@ -272,19 +293,17 @@ export class AppComponent {
     console.log(this.file);
     console.log(this.file.item);
     if (this.file && this.file.item) {
+      this.isScanning = true;
       this.apiService.uploadCSV(this.file.item, this.columns).subscribe(res => {
         console.log(res);
+        this.isScanning = false;
+        this.isAutoScanDone = true;
         this.apiService.openSnackBar('Upload successful', 'Success');
       }, err => {
+        this.isScanning = false;
+        this.isAutoScanDone = true;
         console.log(err);
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
-        this.apiService.openSnackBar(err, 'Error');
+        this.apiService.openSnackBar('Error while scanning CSV', 'Error');
       })
     }
   }
@@ -316,6 +335,18 @@ export class AppComponent {
     });
   }
 
+  assignJson(file: any) {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        let temp: any = JSON.parse(event.target.result);
+        this.attributes = temp['fieldMappings'];
+        console.log(this.attributes);
+      };
+      reader.readAsText(file);
+    }
+  }
+
 
 
   onFileDropped(file: any) {
@@ -333,7 +364,13 @@ export class AppComponent {
         progress: 0
       };
     }
+    if(this.autoScan) {
+      this.scanFile();
+    }
+
   }
+
+
 
   fileInputChange(event: any) {
     const inputElement = event.target as HTMLInputElement;
@@ -343,6 +380,40 @@ export class AppComponent {
   deleteFile() {
     if (confirm('Are you sure you want to delete this file?')) {
       this.file = {};
+    }
+  }
+
+  onJsonFileDropped(file: any) {
+    this.jsonfile['item'] = file[0];
+    this.jsonfile['progress'] = 0;
+  }
+
+
+  jsonfileBrowseHandler(inputElement: HTMLInputElement) {
+    const files = inputElement.files;
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
+      this.jsonfile = {
+        item: selectedFile,
+        progress: 0
+      };
+      this.assignJson(selectedFile)
+    }
+
+  }
+
+
+
+  jsonfileInputChange(event: any) {
+    console.log(event)
+    const inputElement = event.target as HTMLInputElement;
+    this.jsonfileBrowseHandler(inputElement);
+  }
+
+  deletejsonFile() {
+    if (confirm('Are you sure you want to delete this file?')) {
+      this.jsonfile = {};
+      this.attributes = [];
     }
   }
 }
