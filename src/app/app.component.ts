@@ -228,6 +228,32 @@ export class AppComponent {
   isLoading1 = false;
   attributes: any = [];
   expandedRows: string[] = [];
+  scanResult:any = {
+    "isError": true,
+    "durationInSeconds": 0.010470167,
+    "errors": [
+        {
+            "column": "ContactPhone",
+            "row": 1,
+            "type": "invalid-phone"
+        },
+        {
+            "column": "Subject",
+            "row": 4,
+            "type": "data-missing"
+        },
+        {
+            "column": "Description",
+            "row": 4,
+            "type": "data-missing"
+        },
+        {
+            "column": "Subject",
+            "row": 5,
+            "type": "data-missing"
+        }
+    ]
+ };
 
   constructor(public dialog: MatDialog, private apiService: ApiService) { }
 
@@ -298,6 +324,7 @@ export class AppComponent {
         console.log(res);
         this.isScanning = false;
         this.isAutoScanDone = true;
+        this.scanResult = res;
         this.apiService.openSnackBar('Upload successful', 'Success');
       }, err => {
         this.isScanning = false;
