@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import { NgChartsModule } from 'ng2-charts';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NgChartsModule } from 'ng2-charts';
     HttpClientModule,
     MatCheckboxModule,
     MatTabsModule,
-    NgChartsModule
+    NgChartsModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

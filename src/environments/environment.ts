@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // transformHost:'https://transformer.apiplatform.io'
-  transformHost:'https://00b9-103-224-34-243.ngrok-free.app'
+  transformHost:'https://transformer.apiplatform.io'
+  // transformHost:'https://00b9-103-224-34-243.ngrok-free.app'
 };
 
 /*

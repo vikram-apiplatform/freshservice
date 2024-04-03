@@ -153,7 +153,8 @@
           </div>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
-          <button *ngIf="connectionResult !== 'success'" mat-raised-button style="margin-right: 10px;" (click)="connect()" color="primary">
+          <button *ngIf="connectionResult !== 'success'" mat-raised-button style="margin-right: 10px;"
+            (click)="connect()" color="primary">
             <span *ngIf="!isLoading1">Connect </span>
             <span *ngIf="isLoading1">
               <img src="../assets/button_loading.gif" class="img img-responsive button_loading" style="width: 20px;">
@@ -403,69 +404,92 @@
       <mat-card style="width: 90%;margin: auto;">
         <p class="source-txt">Data Transformation Results</p>
         <div class="d-flex">
-          <div class="col-4">
+          <!-- <div class="col-4">
             <div *ngIf="workflowRunData">
               <p><span class="source-txt">Run Id :</span> {{workflowRunData['workflowRunId']}}</p>
               <p><span class="source-txt">Start Time :</span> {{getFormattedTime(workflowRunData['startTime'])}}</p>
               <p><span class="source-txt">Total Records :</span> {{workflowRunData['totalRecords']}}</p>
             </div>
-          </div>
-          <div class="col-2"></div>
-          <div class="col-6">
+          </div>-->
+          <div class="col-4"></div>
+          <div class="col-4">
             <canvas baseChart [labels]="chartLabels" [datasets]="doughnutChartDatasets" [options]="doughnutChartOptions"
               [legend]="true" [type]="'doughnut'">
             </canvas>
           </div>
+          <div class="col-4"></div>
+        </div>
+        <div class="d-flex" *ngIf="workflowIds && workflowIds.length>0" style="margin-top:2rem;" >
+          <div class="col-3">
+            <mat-list role="list">
+              <mat-list-item role="listitem" *ngFor="let id of workflowIds" (click)="selectedView=id;getWorkflowData(id)"  style="border-bottom: 0.5px solid #ccc; cursor: pointer;" [ngStyle]="{'background':IsSelectedView(id)}"><span style="font-size: 12px;">{{id}}</span></mat-list-item>
+            </mat-list>
+          </div>
+          <div class="col-9">
+            <div class="d-flex justify-content-center" style="margin-top: 2rem;" *ngIf="scanResult && !scanResult.isError">
+
+              <div>
+                <p class="source-txt">Workflow Name :
+                  <span style="font-size: 13px;font-weight: 300;">{{getWorkflowName(selectedView)}}</span>
+                </p>
+              </div>
+              <div>
+                <p class="source-txt" style="margin-left: 2rem;">Start Time : <span
+                    style="font-size: 13px;font-weight: 300;">{{getWorkflowStartTime(selectedView)}}</span></p>
+              </div>
+            </div>
+            <div class="table-responsive" *ngIf="!isLoading3 && workflowRunData">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Step Id</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <ng-container *ngFor="let item of getResultData(selectedView); let j = index">
+                    <tr class="root">
+                      <td>{{item.stepId}}</td>
+                      <td>{{getFormattedTime(item.startTime)}}</td>
+                      <td>{{getFormattedTime(item.endTime)}}</td>
+                      <td>{{item.status}}</td>
+                    </tr>
+                    <tr *ngIf="item.subSteps">
+                      <td colspan="3">
+                        <div class="table-responsive">
+                          <table class="col-lg-12 col-md-12 col-sm-12">
+                            <thead>
+                              <tr>
+                                <th scope="col">Step Id</th>
+                                <th scope="col">Start Time</th>
+                                <th scope="col">End Time</th>
+                                <th scope="col">Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item1 of item.subSteps;let k = index">
+                                <td>{{item1.stepId}}</td>
+                                <td>{{getFormattedTime(item1.startTime)}}</td>
+                                <td>{{getFormattedTime(item1.endTime)}}</td>
+                                <td>{{item1.status}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+    
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
-        <div class="table-responsive" style="margin-top:2rem;" *ngIf="!isLoading3 && workflowRunData">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Step Id</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">End Time</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <ng-container *ngFor="let item of workflowRunData.steps; let j = index">
-                <tr class="root">
-                  <td>{{item.stepId}}</td>
-                  <td>{{getFormattedTime(item.startTime)}}</td>
-                  <td>{{getFormattedTime(item.endTime)}}</td>
-                  <td>{{item.status}}</td>
-                </tr>
-                <tr *ngIf="item.subSteps">
-                  <td colspan="3">
-                    <div class="table-responsive">
-                      <table class="col-lg-12 col-md-12 col-sm-12">
-                        <thead>
-                          <tr>
-                            <th scope="col">Step Id</th>
-                            <th scope="col">Start Time</th>
-                            <th scope="col">End Time</th>
-                            <th scope="col">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item1 of item.subSteps;let k = index">
-                            <td>{{item1.stepId}}</td>
-                            <td>{{getFormattedTime(item1.startTime)}}</td>
-                            <td>{{getFormattedTime(item1.endTime)}}</td>
-                            <td>{{item1.status}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </ng-container>
-
-            </tbody>
-          </table>
-        </div>
+       
       </mat-card>
 
     </mat-step>
