@@ -153,23 +153,22 @@
           </div>
         </div>
         <div class="col-12" style="text-align: center;margin-top: 1rem;margin-bottom: 1rem;">
-          <button  mat-raised-button style="margin-right: 10px;" (click)="connect()"
-            color="primary">
+          <button mat-raised-button style="margin-right: 10px;" (click)="connect()" color="primary">
             <span *ngIf="!isLoading1">Connect </span>
             <span *ngIf="isLoading1">
               <img src="../assets/button_loading.gif" class="img img-responsive button_loading" style="width: 20px;">
             </span>
 
           </button>
-          <button *ngIf="isconnected" mat-raised-button matStepperNext color="primary" [disabled]="connectionResult !== 'success'">
+          <button *ngIf="isconnected" mat-raised-button matStepperNext color="primary"
+            [disabled]="connectionResult !== 'success'">
             Proceed to Field Mapping
           </button>
         </div>
       </mat-card>
     </mat-step>
 
-    <mat-step label="Field Mapping" state="mapping">
-
+    <!-- <mat-step label="Field Mapping" state="mapping">
       <mat-card style="width: 450px;margin: auto;background-color: #f8f9fa;">
         <p class="source-txt">
           <span *ngIf="jsonfile && !jsonfile['item']">Please upload JSON file for fields mapping</span>
@@ -184,7 +183,6 @@
             Proceed to Transformation
           </button>
         </div>
-
         <div>
           <mat-card *ngIf="jsonfile && !jsonfile['item'] && importJson" class="drag-drop-container inner-card m5">
             <div class="drag-drop-inner-container" (click)="fileInput1.click()" appDragDrop
@@ -236,28 +234,17 @@
                     [(ngModel)]="attribute.targetfield">
 
                 </td>
-
-
                 <td class="tour-schema-def-data-type">
-
                   <input class="form-control" [(ngModel)]="attribute.sourcefield" type="text">
                 </td>
                 <td>
-                  <!-- <mat-checkbox
-                                [checked]="attribute.isOverride"
-                                (change)="attribute.isOverride = !attribute.isOverride;">
-                            </mat-checkbox> -->
                   <mat-icon (click)="toggleCollapse(attribute.sourcefield);" matTooltip="Add"><span
                       *ngIf="expandedRows.includes(attribute.sourcefield)">keyboard_arrow_down</span>
                     <span *ngIf="!expandedRows.includes(attribute.sourcefield)">keyboard_arrow_up</span></mat-icon>
-
                 </td>
-
                 <td>
                   <mat-icon (click)="removeAttribute(attributes, j)">remove_circle</mat-icon>
-
                 </td>
-
               </tr>
               <tr *ngIf="attribute&& expandedRows.includes(attribute.sourcefield)">
                 <td colspan="3">
@@ -282,7 +269,6 @@
                           </td>
                           <td class="text-center">
                             <mat-icon (click)="removeOverride(attribute, k)">remove_circle</mat-icon>
-
                           </td>
                         </tr>
                       </tbody>
@@ -291,10 +277,105 @@
                 </td>
               </tr>
             </ng-container>
-
           </tbody>
         </table>
       </div>
+    </mat-step> -->
+
+    <mat-step label="Field Mapping" state="mapping">
+        <div style="text-align: right;margin-bottom: 1rem;">
+          <button mat-raised-button matStepperNext color="primary"
+            style="margin-left: 10px;">
+            Proceed to Transformation
+          </button>
+        </div>
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab *ngFor="let target of payload.target; let i = index">
+          <ng-template mat-tab-label>
+            <span>{{target.name}}</span>
+        </ng-template>
+        <div class="table-responsive" style="height: 80vh;overflow-y: auto;margin-top: 10px;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Target Field</th>
+                <th scope="col">Source Field</th>
+                <th scope="col">Override</th>
+                <th scope="col"> <mat-icon matTooltip="Add Attribute" (click)="addTargetAttributeField(i)">add_box</mat-icon>
+                </th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <ng-container *ngFor="let attribute of target.fieldMappings; let j = index">
+                <tr class="root">
+                  <td class="tour-schema-def-data-type">
+                    <input class="form-control attribute" [value]="attribute.targetfield"
+                      [(ngModel)]="attribute.targetfield">
+  
+                  </td>
+  
+  
+                  <td class="tour-schema-def-data-type">
+  
+                    <input class="form-control" [(ngModel)]="attribute.sourcefield" type="text">
+                  </td>
+                  <td>
+                    <!-- <mat-checkbox
+                                  [checked]="attribute.isOverride"
+                                  (change)="attribute.isOverride = !attribute.isOverride;">
+                              </mat-checkbox> -->
+                    <mat-icon (click)="toggleCollapse(attribute.sourcefield);" matTooltip="Add"><span
+                        *ngIf="expandedRows.includes(attribute.sourcefield)">keyboard_arrow_down</span>
+                      <span *ngIf="!expandedRows.includes(attribute.sourcefield)">keyboard_arrow_up</span></mat-icon>
+  
+                  </td>
+  
+                  <td>
+                    <mat-icon (click)="removeAttribute(target.fieldMappings, j)">remove_circle</mat-icon>
+  
+                  </td>
+  
+                </tr>
+                <tr *ngIf="(attribute && expandedRows.includes(attribute.sourcefield))">
+                  <td colspan="3">
+                    <div class="table-responsive">
+                      <table class="col-lg-12 col-md-12 col-sm-12">
+                        <thead>
+                          <tr>
+                            <th>Source Value</th>
+                            <th>Target Value</th>
+                            <th>
+                              <mat-icon matTooltip="Add Attribute" (click)="addOverride(attribute)">add_box</mat-icon>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let override of attribute.override;let k = index">
+                            <td>
+                              <input class=" form-control" [(ngModel)]="override.sourcevalue" type="text">
+                            </td>
+                            <td>
+                              <input class="form-control" [(ngModel)]="override.targetvalue" type="text">
+                            </td>
+                            <td class="text-center">
+                              <mat-icon (click)="removeOverride(attribute, k)">remove_circle</mat-icon>
+  
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+  
+            </tbody>
+          </table>
+        </div>
+        </mat-tab>
+      </mat-tab-group>
+      
 
     </mat-step>
 

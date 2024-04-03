@@ -17,6 +17,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCardModule,
     MatSnackBarModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
