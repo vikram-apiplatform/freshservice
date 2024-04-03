@@ -3506,6 +3506,7 @@ export class AppComponent {
     this.apiService.transformData(this.payload).subscribe(res => {
       console.log(res);
       this.isLoading2 = false;
+      this.selectedIndex = 4;
       if (res) {
         let item: any = res;
         this.workflowRunId = item.workflowRunId;
@@ -3515,7 +3516,6 @@ export class AppComponent {
           if (res1) {
             this.workflowRunData = res1;
             console.log(this.workflowRunData);
-            this.selectedIndex = 4;
           }
         }, err => {
           this.isLoading3 = false;
